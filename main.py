@@ -17,10 +17,18 @@ usuarios_anuncio_A = {101, 102, 103, 104, 105}
 usuarios_anuncio_B = {104, 105, 106, 107}
 
 # TODO: calcule os conjuntos pedidos
-uniao = set()           # substitua pelo cálculo correto
-intersecao = set()      # substitua
-diferenca_A_B = set()   # substitua
-diferenca_B_A = set()   # substitua
+uniao = set()
+
+for u in usuarios_anuncio_A:
+    uniao.add(u)
+
+for u in usuarios_anuncio_B:
+    uniao.add(u)
+
+    
+intersecao = usuarios_anuncio_A & usuarios_anuncio_B
+diferenca_A_B = usuarios_anuncio_A - usuarios_anuncio_B
+diferenca_B_A = usuarios_anuncio_B - usuarios_anuncio_A
 
 print("Uniao:", uniao)
 print("Intersecao:", intersecao)
@@ -44,9 +52,20 @@ pg_razao = 1.5
 
 # TODO: calcule os próximos 6 termos da PA (Dia 2 ao Dia 7)
 pa_valores = []  # substitua pela lista correta
+i = 2
+while i <= 7:
+    pa_valores.append(pa_inicial + (i - 1) * pa_razao)
+    i = i + 1
+
+
 
 # TODO: calcule os próximos 5 termos da PG (Dia 2 ao Dia 6)
 pg_valores = []  # substitua pela lista correta
+i = 2
+while i <= 6:
+    pg_valores.append(pg_inicial * (pg_razao ** (i - 1)))
+    i = i + 1
+
 
 print("PA - próximos 6 dias:", pa_valores)
 print("PG - próximos 5 dias:", pg_valores)
@@ -63,7 +82,7 @@ b = 50.0  # custo fixo diário
 usuarios_ativos = 1500
 
 # TODO: calcule o custo total y = a*x + b
-custo_total = 0.0  # substitua pelo cálculo correto
+custo_total = a * usuarios_ativos + b 
 
 print("Custo total para", usuarios_ativos, "usuarios ativos:", custo_total)
 print()
