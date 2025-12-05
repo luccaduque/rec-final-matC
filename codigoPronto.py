@@ -99,21 +99,22 @@ b_q = 20
 c_q = 0
 
 # TODO: calcule o Delta = b^2 - 4ac
-delta = 0  # substitua
+delta = (b_q ** 2) - (4 * a_q * c_q)  # substitua
 
 # TODO: calcule as raízes x1 e x2 (use apenas operadores básicos e **0.5 para raiz)
-x1 = 0.0  # substitua
-x2 = 0.0  # substitua
-
+sqrt_delta = delta ** 0.5
+x1 = (-b_q + sqrt_delta) / (2 * a_q)  
+x2 = (-b_q - sqrt_delta) / (2 * a_q)
 # TODO: calcule o vértice: Xv = -b/(2a), Yv = valor de y em Xv
-xv = 0.0  # substitua
-yv = 0.0  # substitua
+xv = -b_q / (2 * a_q)  # substitua
+yv = a_q * (xv ** 2) + b_q * xv + c_q  # substitua
 
 print("Delta:", delta)
 print("Raiz x1:", x1)
 print("Raiz x2:", x2)
 print("Vértice (Xv, Yv):", xv, yv)
 print()
+
 
 # =========================================================
 # Item 5 – Matrizes: Análise de Features (15 pontos)
@@ -129,7 +130,17 @@ matriz_features = [
 
 # TODO: calcule a matriz transposta (3x3)
 # Dica: linha vira coluna e coluna vira linha.
-matriz_transposta = []  # substitua pela matriz transposta
+matriz_transposta = []  
+j = 0
+
+while j < len(matriz_features[0]):
+    linha_t = []
+    i = 0
+    while i < len(matriz_features):
+        linha_t.append(matriz_features[i][j])
+        i += 1
+    matriz_transposta.append(linha_t)
+    j += 1
 
 print("Matriz transposta:")
 print(matriz_transposta)
@@ -148,10 +159,11 @@ matriz_seguranca = [
 ]
 
 # TODO: calcule o determinante usando a Regra de Sarrus
-determinante = 0  # substitua pelo cálculo correto
+determinante = (1*0*6 + 4*5*3 + 3*2*2) - (3*0*3 + 1*5*2 + 4*2*6)
 
 print("Determinante da matriz de segurança:", determinante)
 print()
+
 
 # =========================================================
 # Item 7 – Grafos: Navegação do Usuário (10 pontos)
@@ -168,8 +180,8 @@ mapa_app = {
 }
 
 # TODO: obtenha a lista de destinos a partir de 'Home' e 'Perfil'
-destinos_home = []   # substitua
-destinos_perfil = [] # substitua
+destinos_home = mapa_app['Home']   # substitua
+destinos_perfil = mapa_app['Perfil'] # substitua
 
 print("A partir de 'Home' o usuário pode ir para:", destinos_home)
 print("A partir de 'Perfil' o usuário pode ir para:", destinos_perfil)
@@ -184,19 +196,56 @@ print("=== Item 8: Estatística – Tempo de Uso ===")
 tempos_uso = [15, 10, 22, 18, 10, 12, 40, 30, 8, 15]
 
 # TODO: calcule a média
-media = 0.0  # substitua
+soma = 0
+i = 0
+while i < len(tempos_uso):
+    soma = soma + tempos_uso[i]
+    i = i + 1
+media = soma / len(tempos_uso)
 
 # TODO: calcule a mediana (lista precisa estar ordenada)
-mediana = 0.0  # substitua
+ordenados = sorted(tempos_uso)
+n = len(ordenados)
+
+if n % 2 == 0:
+    mediana = (ordenados[n//2 - 1] + ordenados[n//2]) / 2
+else:
+    mediana = ordenados[n//2]
 
 # TODO: calcule a(s) moda(s)
-modas = []  # substitua por lista com o(s) valor(es) modal(is)
+modas = []
+frequencias = {}
+
+i = 0
+while i < len(tempos_uso):
+    valor = tempos_uso[i]
+    if valor in frequencias:
+        frequencias[valor] = frequencias[valor] + 1
+    else:
+        frequencias[valor] = 1
+    i = i + 1
+
+maior_frequencia = 0
+for v in frequencias:
+    if frequencias[v] > maior_frequencia:
+        maior_frequencia = frequencias[v]
+
+for v in frequencias:
+    if frequencias[v] == maior_frequencia and maior_frequencia > 1:
+        modas.append(v)
 
 # TODO: calcule a variância (média dos quadrados dos desvios)
-variancia = 0.0  # substitua
+soma_quadrados = 0
+i = 0
+while i < len(tempos_uso):
+    diferenca = tempos_uso[i] - media
+    soma_quadrados = soma_quadrados + (diferenca ** 2)
+    i = i + 1
+
+variancia = soma_quadrados / len(tempos_uso)
 
 # TODO: calcule o desvio padrão (raiz quadrada da variância)
-desvio_padrao = 0.0  # substitua
+desvio_padrao = variancia ** 0.5
 
 print("Média:", media)
 print("Mediana:", mediana)
